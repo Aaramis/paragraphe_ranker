@@ -3,11 +3,10 @@
 ## Getting Start
 To start working on this project, follow these steps:
 
-Create environment
-Clone the repository: `git clone git@github.com:Aaramis/Protein_Classifier.git`
-Create a virtual environment: `python -m venv .venv`
-Activate the virtual environment: `source .venv/bin/activate` (Linux/Mac) or `.venv\Scripts\activate` (Windows)
-Install dependencies: `pip install -r requirements.txt`
+* Clone the repository: `git clone git@github.com:Aaramis/Protein_Classifier.git`
+* Create a virtual environment: `python -m venv .venv`
+* Activate the virtual environment: `source .venv/bin/activate` (Linux/Mac) or `.venv\Scripts\activate` (Windows)
+* Install dependencies: `pip install -r requirements.txt`
 
 
 ## Text To Paragraphe

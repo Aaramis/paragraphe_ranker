@@ -1,11 +1,14 @@
 import numpy as np
 import math
+import os
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.signal import argrelextrema
 from typing import List
 from src.plot import plot_similarities, plot_relative_minimas
-
+from argparse import Namespace
+from src.utils import save_paragraphs
+from src.plot import plot_size_repartition
 
 def encode_sentences(
     sentences: List[str], model_name: str = "all-mpnet-base-v2"
@@ -136,5 +139,41 @@ def create_paragraphs_at_minimas(sentences: List[str], minimas: List[int]) -> Li
         else:
             # If it is a normal sentence, just add a dot to the end and keep adding sentences to the line
             line += f"{each}. "
+
+    return paragraphs
+
+
+def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool) -> List[str]:
+    """
+    Take a list of sentences and split them into paragraphes
+    return the list of paragraphes
+    """
+    embeddings = encode_sentences(sentences)
+
+    similarities = get_cosine_similarity(
+        embeddings,
+        os.path.join(output_path, "Cosine_similarities_matrix.png"),
+        save,
+    )
+
+    activated_similarities = activate_similarities(similarities, p_size=2)
+
+    # Increase Order to reduce number of paragraphe
+    minimas = get_minimas(
+        activated_similarities,
+        1,
+        os.path.join(output_path, "Relative_minimas.png"),
+        save,
+    )
+
+    paragraphs = create_paragraphs_at_minimas(sentences, minimas)
+
+    plot_size_repartition(
+        paragraphs, os.path.join(output_path, "paragraphes_distribution.png"), True
+    )
+
+    save_paragraphs(
+        paragraphs, os.path.join(output_path, f"paragraphe_{file_name}.txt")
+    )
 
     return paragraphs

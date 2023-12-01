@@ -44,7 +44,12 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Flag to trigger plotting."
     )
-
+    main_args.add_argument(
+        "--mode",
+        type=str,
+        help="Choose the methode you need [embedding | simple]",
+        default="embedding",
+    )
     return parser.parse_args()
 
 
