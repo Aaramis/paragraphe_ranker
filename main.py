@@ -6,6 +6,7 @@ from prg.utils import (
     create_sentences,
 )
 from prg.embedding_split import paragraphs_by_embedding
+from prg.simple import simple_paragraphs
 
 
 def main():
@@ -26,6 +27,8 @@ def main():
     if args.mode == "embedding":
         paragraphs = paragraphs_by_embedding(sentences, args.output_path, args.file_name, args.save_plots)
 
+    elif args.mode == "simple":
+        paragraphs = simple_paragraphs(sentences, args.output_path, args.file_name, args.save_plots, 100)
 
 if __name__ == "__main__":
     main()
