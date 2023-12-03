@@ -1,12 +1,8 @@
-PyPDF2
 transformers 
 accelerate
-pymupdf
-tika
 datasets
 sentence_transformers
 sentencepiece
 openai
 matplotlib
 seaborn
-plotly

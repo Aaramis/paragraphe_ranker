@@ -21,5 +21,21 @@ python main.py --help
 
 ## Run
 ```
-python  --file_path ./books/pdf --file_name medium_sentence_to_paragraph.pdf --output_path ./output --save_plots
+python  main.py --file_path ./books/pdf --file_name medium_sentence_to_paragraph.pdf --output_path ./output --save_plots
+```
+
+
+## Make de package
+
+If you want to run it in your notebook simply add a "!" at the beginning.
+* ```pip install wheel```
+* ```python setup.py bdist_wheel```
+* ```pip install ./dist/prg-0.1-py3-none-any.whl```
+
+After than you can simply call the package as follow:
+
+```python
+from prg.text_2_paragraphes import create_paragraphes
+
+create_paragraphes("./../books/pdf", 'medium_sentence_to_paragraph.pdf', './output', 'embedding', False)
 ```

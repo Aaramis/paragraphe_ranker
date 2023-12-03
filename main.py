@@ -1,11 +1,11 @@
 import os
-from src.config import parse_args, check_arguments
-from src.file_reader import extract_text_from_document
-from src.utils import (
+from prg.config import parse_args, check_arguments
+from prg.file_reader import extract_text_from_document
+from prg.utils import (
     sentences_homogeneisation,
     create_sentences,
 )
-from src.embedding_split import paragraphs_by_embedding
+from prg.embedding_split import paragraphs_by_embedding
 
 
 def main():

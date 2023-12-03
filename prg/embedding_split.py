@@ -5,10 +5,10 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.signal import argrelextrema
 from typing import List
-from src.plot import plot_similarities, plot_relative_minimas
+from prg.plot import plot_similarities, plot_relative_minimas
 from argparse import Namespace
-from src.utils import save_paragraphs
-from src.plot import plot_size_repartition
+from prg.utils import save_paragraphs
+from prg.plot import plot_size_repartition
 
 def encode_sentences(
     sentences: List[str], model_name: str = "all-mpnet-base-v2"
