@@ -25,7 +25,7 @@ python  main.py --file_path ./books/pdf --file_name medium_sentence_to_paragraph
 ```
 
 
-## Make de package
+## Build package
 
 If you want to run it in your notebook simply add a "!" at the beginning.
 * ```pip install wheel```
