@@ -24,7 +24,7 @@ def simple_paragraphs(sentences, output_path, file_name, save_plots, max_word_co
 
     for sentence in sentences:
         # Preprocess sentence
-        sentence = re.sub(' +', ' ', sentence.replace("\n", "").replace("\t", ""))
+        sentence = re.sub(" .+", " ", re.sub(' +', ' ',sentence.replace("\n", "").replace("\t", "")))
 
         # Check if adding the sentence exceeds the word count limit
         if len(current_sentence.split(" ")) + len(sentence.split(" ")) < max_word_count:

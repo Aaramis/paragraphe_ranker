@@ -56,3 +56,17 @@ poetry config pypi-token.test-pypi pypi-[token]
 poetry build
 poetry publish -r [poetry_repo]
 ```
+
+
+## Google Collab
+
+```
+from google.colab import drive
+drive.mount('/content/drive')
+!mkidr /root/.ssh
+!cp /content/drive/MyDrive/deploy_keys/* /root/.ssh/
+!ssh-keyscan github.com >> /root/.ssh/known_hosts
+! pip uninstall prg
+! pip install git+ssh://git@github.com/Aaramis/paragraphe_ranker.git
+from prg.text_2_paragraphes import create_paragraphes
+```

@@ -1,6 +1,6 @@
 import fitz
-# import parser
-from ebooklib import epub
+import parser
+# from ebooklib import epub
 
 def extract_text_from_pdf(pdf_path: str) -> str:
     text = ""
@@ -15,29 +15,29 @@ def extract_text_from_pdf(pdf_path: str) -> str:
     return text
 
 
-def extract_text_from_epub(epub_path: str) -> str:
-    """
-    Extract text content from an EPUB file.
-
-    Parameters:
-    - epub_path (str): Path to the EPUB file.
-
-    Returns:
-    - str: Extracted text content.
-    """
-    book = epub.read_epub(epub_path)
-    content = []
-
-    for item in book.get_items():
-        if isinstance(item, epub.EpubItem):
-            content.append(item.content)
-
-    return ' '.join(content)
-
 # def extract_text_from_epub(epub_path: str) -> str:
-#     parsed = parser.from_file(epub_path, service='text')
-#     content = parsed["content"]
-#     return content
+#     """
+#     Extract text content from an EPUB file.
+
+#     Parameters:
+#     - epub_path (str): Path to the EPUB file.
+
+#     Returns:
+#     - str: Extracted text content.
+#     """
+#     book = epub.read_epub(epub_path)
+#     content = []
+
+#     for item in book.get_items():
+#         if isinstance(item, epub.EpubItem):
+#             content.append(item.content)
+
+#     return ' '.join(content)
+
+def extract_text_from_epub(epub_path: str) -> str:
+    parsed = parser.from_file(epub_path, service='text')
+    content = parsed["content"]
+    return content
 
 
 def extract_text_from_document(file_path: str) -> str:

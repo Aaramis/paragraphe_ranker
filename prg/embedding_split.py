@@ -10,7 +10,7 @@ from prg.utils import save_paragraphs
 from prg.plot import plot_size_repartition
 
 
-def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2") -> List[List[float]]:
+def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2", batch_size: int = 32) -> List[List[float]]:
     """
     Encode a list of sentences using SentenceTransformer model.
 
@@ -29,7 +29,7 @@ def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2"
     print("Getting embedding")
 
     # Encode sentences
-    embeddings = model.encode(sentences)
+    embeddings = model.encode(sentences, batch_size=batch_size)
     print(f"Embedding shape {embeddings.shape}")
 
     return embeddings
