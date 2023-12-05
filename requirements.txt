@@ -1,5 +1,4 @@
 PyMuPDF
-parser
 transformers 
 accelerate
 datasets
@@ -8,3 +7,4 @@ sentencepiece
 openai
 matplotlib
 seaborn
+parser
