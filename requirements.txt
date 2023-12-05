@@ -1,4 +1,4 @@
-fitz
+PyMuPDF
 transformers 
 accelerate
 datasets
