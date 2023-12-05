@@ -7,4 +7,4 @@ sentencepiece
 openai
 matplotlib
 seaborn
-parser
+parse
