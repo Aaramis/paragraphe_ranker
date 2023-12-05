@@ -39,3 +39,20 @@ from prg.text_2_paragraphes import create_paragraphes
 
 create_paragraphes("./../books/pdf", 'medium_sentence_to_paragraph.pdf', './output', 'embedding', False)
 ```
+
+
+
+## Poetry
+
+```
+poetry init
+poetry env info -p
+poetry shell
+source [path_shell_to_en]
+poetry add [package]
+poetry remove [package]
+poetry config repository_name-pypi htttps://test.pypi.org/legacy
+poetry config pypi-token.test-pypi pypi-[token]
+poetry build
+poetry publish -r [poetry_repo]
+```

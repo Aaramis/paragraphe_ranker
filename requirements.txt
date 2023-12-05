@@ -6,3 +6,4 @@ sentencepiece
 openai
 matplotlib
 seaborn
+fitz

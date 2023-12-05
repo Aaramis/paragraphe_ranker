@@ -4,6 +4,7 @@ import unicodedata
 from prg.utils import save_paragraphs
 from prg.plot import plot_size_repartition
 
+
 def simple_paragraphs(sentences, output_path, file_name, save_plots, max_word_count=100):
     """
     Create paragraphs from a list of sentences with a maximum word count constraint.
@@ -37,7 +38,6 @@ def simple_paragraphs(sentences, output_path, file_name, save_plots, max_word_co
     # Append any remaining sentence as the last paragraph
     if current_sentence:
         paragraphs.append(unicodedata.normalize("NFKD", current_sentence))
-
 
     plot_size_repartition(
         paragraphs, os.path.join(output_path, "paragraphes_distribution.png"), save_plots

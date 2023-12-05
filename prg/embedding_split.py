@@ -6,13 +6,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 from scipy.signal import argrelextrema
 from typing import List
 from prg.plot import plot_similarities, plot_relative_minimas
-from argparse import Namespace
 from prg.utils import save_paragraphs
 from prg.plot import plot_size_repartition
 
-def encode_sentences(
-    sentences: List[str], model_name: str = "all-mpnet-base-v2"
-) -> List[List[float]]:
+
+def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2") -> List[List[float]]:
     """
     Encode a list of sentences using SentenceTransformer model.
 
