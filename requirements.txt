@@ -8,3 +8,4 @@ openai
 matplotlib
 seaborn
 parse
+parser
