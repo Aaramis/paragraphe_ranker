@@ -1,3 +1,4 @@
+fitz
 transformers 
 accelerate
 datasets
@@ -6,4 +7,3 @@ sentencepiece
 openai
 matplotlib
 seaborn
-fitz
