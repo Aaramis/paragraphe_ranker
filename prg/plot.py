@@ -3,12 +3,15 @@ import seaborn as sns
 from typing import List
 
 
-def plot_size_repartition(my_list: List[str], output_path: str, save: bool) -> None:
+def plot_size_repartition(my_list: List[str], output_path: str, save: bool, word:bool = False) -> None:
 
     # Create a new figure for each call
     fig, ax = plt.subplots()
 
-    plt.plot(sorted([len(i) for i in my_list]))
+    if word :
+        plt.plot(sorted([len(i.split()) for i in my_list]))
+    else :
+        plt.plot(sorted([len(i) for i in my_list]))
 
     if save:
         plt.savefig(output_path)

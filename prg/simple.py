@@ -22,9 +22,10 @@ def simple_paragraphs(sentences, output_path, file_name, save_plots, max_word_co
     paragraphs = []
     current_sentence = ""
 
+
     for sentence in sentences:
         # Preprocess sentence
-        sentence = re.sub(" .+", " ", re.sub(' +', ' ',sentence.replace("\n", "").replace("\t", "")))
+        sentence = re.sub(" \.+", " ", re.sub(' +', ' ',sentence.replace("\n", "").replace("\t", "")))
 
         # Check if adding the sentence exceeds the word count limit
         if len(current_sentence.split(" ")) + len(sentence.split(" ")) < max_word_count:
@@ -40,7 +41,7 @@ def simple_paragraphs(sentences, output_path, file_name, save_plots, max_word_co
         paragraphs.append(unicodedata.normalize("NFKD", current_sentence))
 
     plot_size_repartition(
-        paragraphs, os.path.join(output_path, "paragraphes_distribution.png"), save_plots
+        paragraphs, os.path.join(output_path, "paragraphes_distribution.png"), save_plots, True
     )
 
     save_paragraphs(

@@ -66,7 +66,7 @@ drive.mount('/content/drive')
 !mkidr /root/.ssh
 !cp /content/drive/MyDrive/deploy_keys/* /root/.ssh/
 !ssh-keyscan github.com >> /root/.ssh/known_hosts
-! pip uninstall prg
+! pip uninstall -y prg
 ! pip install git+ssh://git@github.com/Aaramis/paragraphe_ranker.git
 from prg.text_2_paragraphes import create_paragraphes
 ```
