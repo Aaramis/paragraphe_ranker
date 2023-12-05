@@ -34,20 +34,20 @@ def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2"
     print("Getting embedding")
 
     # Encode sentences
-    # Encode sentences with a progress bar
-    embeddings = []
+    embeddings = np.empty((0, model.get_sentence_embedding_dimension()))
+
     for batch in tqdm.tqdm(range(0, len(sentences), batch_size)):
         batch_sentences = sentences[batch:batch + batch_size]
         batch_embeddings = model.encode(batch_sentences, batch_size=batch_size)
-        embeddings.extend(batch_embeddings)
+        embeddings = np.concatenate((embeddings, np.array(batch_embeddings)))
 
-    print(f"Embedding shape {embeddings.shape}")
+    print(f"Embedding shape {embeddings.shape} ")
 
     return embeddings
 
 
 def get_cosine_similarity(
-    embeddings: List[List[float]], output_path: str, save: bool = False
+    embeddings: List[List[float]], output_path: str, save: bool = False, display: bool = False
 ):
     """
     Plot cosine similarities matrix using seaborn's heatmap.
@@ -61,7 +61,7 @@ def get_cosine_similarity(
 
     # Check if the shape of embeddings is less than 100
     if len(embeddings) < 100 and save:
-        plot_similarities(similarities, output_path, save)
+        plot_similarities(similarities, output_path, save, display)
     elif len(embeddings) > 100 and save:
         print(
             "The shape of embeddings is greater than or equal to 100. Plotting is skipped."
@@ -109,13 +109,13 @@ def activate_similarities(similarities: np.array, p_size: int = 10) -> np.array:
 
 
 def get_minimas(
-    activated_similarities: np.array, order: int, output_path: str, save: bool = False
+    activated_similarities: np.array, order: int, output_path: str, save: bool = False, display: bool = False
 ):
     # order parameter controls how frequent should be splits. I would not reccomend changing this parameter.
     minimas = argrelextrema(activated_similarities, np.less, order=order)
 
     if save:
-        plot_relative_minimas(minimas, activated_similarities, output_path, save)
+        plot_relative_minimas(minimas, activated_similarities, output_path, save, display)
 
     return minimas
 
@@ -152,7 +152,7 @@ def create_paragraphs_at_minimas(sentences: List[str], minimas: List[int]) -> Li
     return paragraphs
 
 
-def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool) -> List[str]:
+def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool, display: bool) -> List[str]:
     """
     Take a list of sentences and split them into paragraphes
     return the list of paragraphes
@@ -163,6 +163,7 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
         embeddings,
         os.path.join(output_path, "Cosine_similarities_matrix.png"),
         save,
+        display
     )
 
     activated_similarities = activate_similarities(similarities, p_size=2)
@@ -173,16 +174,18 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
         1,
         os.path.join(output_path, "Relative_minimas.png"),
         save,
+        display,
     )
 
     paragraphs = create_paragraphs_at_minimas(sentences, minimas)
 
     plot_size_repartition(
-        paragraphs, os.path.join(output_path, "paragraphes_distribution.png"), save, True
+        paragraphs,
+        os.path.join(output_path, "paragraphes_distribution.png"),
+        save, display, True
     )
 
-    save_paragraphs(
-        paragraphs, os.path.join(output_path, f"paragraphe_{file_name}.txt")
-    )
+    if save :
+        save_paragraphs(paragraphs, os.path.join(output_path, f"paragraphe_{file_name}.txt"))
 
     return paragraphs

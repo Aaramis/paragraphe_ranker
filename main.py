@@ -25,10 +25,10 @@ def main():
     # plot_size_repartition(sentences, os.path.join(args.output_path, "sentences_traited.png"), args.save_plots)
 
     if args.mode == "embedding":
-        paragraphs = paragraphs_by_embedding(sentences, args.output_path, args.file_name, args.save_plots)
+        paragraphs = paragraphs_by_embedding(sentences, args.output_path, args.file_name, args.save_plots, args.display_plots)
 
     elif args.mode == "simple":
-        paragraphs = simple_paragraphs(sentences, args.output_path, args.file_name, args.save_plots, 100)
+        paragraphs = simple_paragraphs(sentences, args.output_path, args.file_name, args.save_plots, args.display_plots, 100)
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,7 @@ import seaborn as sns
 from typing import List
 
 
-def plot_size_repartition(my_list: List[str], output_path: str, save: bool, word:bool = False) -> None:
+def plot_size_repartition(my_list: List[str], output_path: str, save: bool, display: bool,  word:bool = False) -> None:
 
     # Create a new figure for each call
     fig, ax = plt.subplots()
@@ -16,9 +16,20 @@ def plot_size_repartition(my_list: List[str], output_path: str, save: bool, word
     if save:
         plt.savefig(output_path)
 
+    # Display the plot if display is True
+    if display:
+        plt.show()
 
-def plot_similarities(similarities: List[str], output_path: str, save: bool) -> None:
+def plot_similarities(similarities: List[str], output_path: str, save: bool, display: bool) -> None:
+    """
+    Plot and optionally save the cosine similarities matrix.
 
+    Parameters:
+    - similarities (List[str]): List of similarities.
+    - output_path (str): Output path for saving the plot.
+    - save (bool): Whether to save the plot.
+    - display (bool): Whether to display the plot.
+    """
     # Plot the result
     sns.heatmap(similarities, annot=True).set_title("Cosine similarities matrix")
 
@@ -26,10 +37,12 @@ def plot_similarities(similarities: List[str], output_path: str, save: bool) -> 
     if save:
         plt.savefig(output_path)
 
+    # Display the plot if display is True
+    if display:
+        plt.show()
 
-def plot_relative_minimas(
-    minimas, activated_similarities, output_path: str, save: bool
-) -> None:
+
+def plot_relative_minimas(minimas, activated_similarities, output_path: str, save: bool, display: bool) -> None:
 
     # Create a new figure for each call
     fig, ax = plt.subplots()
@@ -52,3 +65,7 @@ def plot_relative_minimas(
     # Save the plot if save is True
     if save:
         plt.savefig(output_path)
+
+    # Display the plot if display is True
+    if display:
+        plt.show()

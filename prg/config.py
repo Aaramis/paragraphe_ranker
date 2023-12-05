@@ -45,6 +45,11 @@ def parse_args() -> argparse.Namespace:
         help="Flag to trigger plotting."
     )
     main_args.add_argument(
+        "--display_plots",
+        action="store_true",
+        help="Flag to trigger plotting."
+    )
+    main_args.add_argument(
         "--mode",
         type=str,
         help="Choose the methode you need [embedding | simple]",
