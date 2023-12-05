@@ -6,7 +6,7 @@ from prg.utils import (
     create_sentences,
 )
 from prg.embedding_split import paragraphs_by_embedding
-from simple import simple_paragraphs
+from prg.simple import simple_paragraphs
 
 
 def create_paragraphes(file_path: str, file_name: str, output_path: str, mode: str, save_plots: bool):
