@@ -1,6 +1,8 @@
 import numpy as np
 import math
 import os
+import tqdm
+import torch
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy.signal import argrelextrema
@@ -23,13 +25,22 @@ def encode_sentences(sentences: List[str], model_name: str = "all-mpnet-base-v2"
     """
     print(f"Loading model {model_name}")
 
-    # Load the SentenceTransformer model
-    model = SentenceTransformer(model_name)
+    # Specify device (use GPU if available, otherwise use CPU)
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+
+    # Load the SentenceTransformer model with the specified device
+    model = SentenceTransformer(model_name, device=device)
 
     print("Getting embedding")
 
     # Encode sentences
-    embeddings = model.encode(sentences, batch_size=batch_size)
+    # Encode sentences with a progress bar
+    embeddings = []
+    for batch in tqdm.tqdm(range(0, len(sentences), batch_size)):
+        batch_sentences = sentences[batch:batch + batch_size]
+        batch_embeddings = model.encode(batch_sentences, batch_size=batch_size)
+        embeddings.extend(batch_embeddings)
+
     print(f"Embedding shape {embeddings.shape}")
 
     return embeddings
