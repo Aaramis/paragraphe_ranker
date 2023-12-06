@@ -152,12 +152,12 @@ def create_paragraphs_at_minimas(sentences: List[str], minimas: List[int]) -> Li
     return paragraphs
 
 
-def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool, display: bool) -> List[str]:
+def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool, display: bool, batch_size: int) -> List[str]:
     """
     Take a list of sentences and split them into paragraphes
     return the list of paragraphes
     """
-    embeddings = encode_sentences(sentences)
+    embeddings = encode_sentences(sentences, batch_size=batch_size)
 
     similarities = get_cosine_similarity(
         embeddings,
@@ -177,7 +177,7 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
         display,
     )
 
-    if minimas[0]:
+    if len(minimas[0]):
         paragraphs = create_paragraphs_at_minimas(sentences, minimas)
     else:
         paragraphs = ''.join(sentences)
