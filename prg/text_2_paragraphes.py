@@ -17,10 +17,10 @@ def create_paragraphes(text: str, mode: str, display_plots: bool):
     # plot_size_repartition(sentences, os.path.join(output_path, "sentences_traited.png"), save_plots)
 
     if mode == "embedding":
-        paragraphs = paragraphs_by_embedding(sentences, None, None, save_plots= False, display_plots = display_plots)
+        paragraphs = paragraphs_by_embedding(sentences, None, None, save = False, display = display_plots)
     
     elif mode == "simple":
-        paragraphs = simple_paragraphs(sentences, None, None, save= False, display=display_plots, max_word_count=100)
+        paragraphs = simple_paragraphs(sentences, None, None, save = False, display = display_plots, max_word_count=100)
     
     return paragraphs
 
