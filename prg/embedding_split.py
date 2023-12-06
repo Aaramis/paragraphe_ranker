@@ -157,30 +157,42 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
     Take a list of sentences and split them into paragraphes
     return the list of paragraphes
     """
-    embeddings = encode_sentences(sentences, batch_size=batch_size)
 
-    similarities = get_cosine_similarity(
-        embeddings,
-        os.path.join(output_path, "Cosine_similarities_matrix.png"),
-        save,
-        display
-    )
+    paragraphs = []
+    total_sentences = len(sentences)
+    start_idx = 0
 
-    activated_similarities = activate_similarities(similarities, p_size=2)
+    while start_idx < total_sentences:
+        end_idx = min(start_idx + 500, total_sentences)
+        batch_sentences = sentences[start_idx:end_idx]
 
-    # Increase Order to reduce number of paragraphe
-    minimas = get_minimas(
-        activated_similarities,
-        1,
-        os.path.join(output_path, "Relative_minimas.png"),
-        save,
-        display,
-    )
+        embeddings = encode_sentences(batch_sentences, batch_size=batch_size)
 
-    if len(minimas[0]):
-        paragraphs = create_paragraphs_at_minimas(sentences, minimas)
-    else:
-        paragraphs = ''.join(sentences)
+        similarities = get_cosine_similarity(
+            embeddings,
+            os.path.join(output_path, "Cosine_similarities_matrix.png"),
+            save,
+            display
+        )
+
+        activated_similarities = activate_similarities(similarities, p_size=2)
+
+        # Increase Order to reduce number of paragraphe
+        minimas = get_minimas(
+            activated_similarities,
+            1,
+            os.path.join(output_path, "Relative_minimas.png"),
+            save,
+            display,
+        )
+
+        if len(minimas[0]):
+            batch_paragraphs = create_paragraphs_at_minimas(batch_sentences, minimas)
+            paragraphs.extend(batch_paragraphs)
+        else:
+            paragraphs.extend(batch_sentences)
+
+        start_idx = end_idx
 
     if display and output_path:
         plot_size_repartition(
