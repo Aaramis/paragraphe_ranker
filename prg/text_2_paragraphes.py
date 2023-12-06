@@ -9,7 +9,7 @@ from prg.embedding_split import paragraphs_by_embedding
 from prg.simple import simple_paragraphs
 
 
-def create_paragraphes(text: str, mode: str, display_plots: bool, batch_size: int = 32):
+def create_paragraphes(text: str, mode: str, display_plots: bool, batch_size: int = 32, nb_sentences: int = 500):
     sentences = create_sentences(text)
     # plot_size_repartition(sentences, os.path.join(output_path, "rep_pre_traitement.png"), False)
 
@@ -17,7 +17,10 @@ def create_paragraphes(text: str, mode: str, display_plots: bool, batch_size: in
     # plot_size_repartition(sentences, os.path.join(output_path, "sentences_traited.png"), save_plots)
 
     if mode == "embedding":
-        paragraphs = paragraphs_by_embedding(sentences, "./", None, save = False, display = display_plots, batch_size=batch_size)
+        paragraphs = paragraphs_by_embedding(sentences, "./", None, save = False,
+                                             display = display_plots,
+                                             batch_size=batch_size,
+                                             nb_sentences=nb_sentences)
     
     elif mode == "simple":
         paragraphs = simple_paragraphs(sentences,  "./", None, save = False, display = display_plots, max_word_count=100)

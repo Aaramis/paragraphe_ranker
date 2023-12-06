@@ -152,7 +152,7 @@ def create_paragraphs_at_minimas(sentences: List[str], minimas: List[int]) -> Li
     return paragraphs
 
 
-def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool, display: bool, batch_size: int) -> List[str]:
+def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: str, save: bool, display: bool, batch_size: int, nb_sentences:int) -> List[str]:
     """
     Take a list of sentences and split them into paragraphes
     return the list of paragraphes
@@ -163,7 +163,7 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
     start_idx = 0
 
     while start_idx < total_sentences:
-        end_idx = min(start_idx + 500, total_sentences)
+        end_idx = min(start_idx + nb_sentences, total_sentences)
         batch_sentences = sentences[start_idx:end_idx]
 
         embeddings = encode_sentences(batch_sentences, batch_size=batch_size)
