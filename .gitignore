@@ -162,3 +162,4 @@ text_to_paragraphe.ipynb
 tests
 poetry.lock
 .github*
+test.py

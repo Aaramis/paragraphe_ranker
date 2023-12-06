@@ -177,13 +177,17 @@ def paragraphs_by_embedding(sentences: List[str], output_path: str, file_name: s
         display,
     )
 
-    paragraphs = create_paragraphs_at_minimas(sentences, minimas)
+    if minimas[0]:
+        paragraphs = create_paragraphs_at_minimas(sentences, minimas)
+    else:
+        paragraphs = ''.join(sentences)
 
-    plot_size_repartition(
-        paragraphs,
-        os.path.join(output_path, "paragraphes_distribution.png"),
-        save, display, True
-    )
+    if display and output_path:
+        plot_size_repartition(
+            paragraphs,
+            os.path.join(output_path, "paragraphes_distribution.png"),
+            save, display, True
+        )
 
     if save :
         save_paragraphs(paragraphs, os.path.join(output_path, f"paragraphe_{file_name}.txt"))
