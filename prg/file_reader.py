@@ -1,7 +1,7 @@
 import fitz
 from ebooklib import epub
 from bs4 import BeautifulSoup as bs 
-
+import re
 
 def extract_text_from_pdf(pdf_path: str) -> str:
     text = ""
@@ -10,7 +10,9 @@ def extract_text_from_pdf(pdf_path: str) -> str:
         for page_num in range(doc.page_count):
             page = doc[page_num]
             text += page.get_text()
-            text = text.replace("\n", " ")
+            text = re.sub(r'\s+', ' ', text)
+            text = re.sub(r' +', ' ', text)
+
     except Exception as e:
         print(f"Error extracting text from PDF: {e}")
     return text
@@ -40,6 +42,8 @@ def extract_text_from_epub(epub_path: str) -> str:
 
     # Extract text
     text = soup.get_text(separator=' ')
+    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r' +', ' ', text)
 
     return text
 
